@@ -1,6 +1,10 @@
 use objc2::sel;
 use objc2_app_kit::{
-    NSApplication, NSApplicationActivationPolicy, NSMenu, NSMenuItem, NSStatusBar,
+    NSApplication,
+    NSApplicationActivationPolicy,
+    NSMenu,
+    NSMenuItem,
+    NSStatusBar,
     NSVariableStatusItemLength,
 };
 use objc2_foundation::{MainThreadMarker, ns_string};

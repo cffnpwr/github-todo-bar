@@ -43,6 +43,7 @@
         let
           miseConfig = fromTOML (builtins.readFile ./mise.toml);
           treefmtVersion = miseConfig.tools."aqua:numtide/treefmt";
+          yamlfmtVersion = miseConfig.tools.yamlfmt;
 
           toolchain = fenix.packages.${system}.fromToolchainFile {
             file = ./rust-toolchain.toml;
@@ -64,6 +65,7 @@
               nixd
               nixfmt
               treefmt.versions."${treefmtVersion}"
+              yamlfmt.versions."${yamlfmtVersion}"
               toolchain
             ];
 

@@ -1,5 +1,6 @@
 [tools]
 "aqua:numtide/treefmt" = "2.4.1"
+yamlfmt = "0.21.0"
 
 [settings]
 experimental = true

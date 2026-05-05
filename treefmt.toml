@@ -9,3 +9,7 @@ includes = ["*.nix"]
 command = "rustfmt"
 options = ["--config-path", "./rustfmt.toml"]
 includes = ["*.rs"]
+
+[formatter.yaml]
+command = "yamlfmt"
+includes = ["*.yaml", "*.yml"]
