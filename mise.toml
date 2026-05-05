@@ -1,0 +1,5 @@
+[tools]
+"aqua:numtide/treefmt" = "2.4.1"
+
+[settings]
+experimental = true
