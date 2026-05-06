@@ -1,0 +1,25 @@
+name: Setup mise
+description: |
+  Install mise tools and the Rust toolchain. mise-action のキャッシュは
+  ~/.local/share/mise/installs しか含まないが、rust は rustup 管理 (~/.rustup)
+  のため復元されず、cache hit 時に mise install が no-op になる一方 rustup は
+  空で、cargo 初回呼び出し時の auto-install が default profile で走り
+  rustfmt/clippy が入らない。自前で rustup ディレクトリをキャッシュし、
+  mise-action のキャッシュは無効化する。
+  Refs: jdx/mise-action#215, jdx/mise-action#184
+runs:
+  using: composite
+  steps:
+    - name: Cache mise tools and rust toolchain
+      uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      with:
+        path: |
+          ~/.local/share/mise/installs
+          ~/.cargo/bin
+          ~/.rustup
+        key: mise-rust-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('mise.toml', 'rust-toolchain.toml') }}
+
+    - name: Setup mise
+      uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4.0.1
+      with:
+        cache: false
