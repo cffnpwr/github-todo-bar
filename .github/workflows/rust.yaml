@@ -11,10 +11,8 @@ on:
       - "Cargo.toml"
       - "Cargo.lock"
       - "rust-toolchain.toml"
-      - "rustfmt.toml"
-      - "flake.nix"
-      - "flake.lock"
-      - ".github/actions/setup-nix/**"
+      - "mise.toml"
+      - ".github/actions/setup-mise/**"
       - ".github/workflows/rust.yaml"
 
 concurrency:
@@ -24,24 +22,6 @@ concurrency:
 permissions: {}
 
 jobs:
-  fmt:
-    name: cargo fmt
-    runs-on: macos-15
-    timeout-minutes: 10
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          persist-credentials: false
-
-      - name: Setup Nix
-        uses: ./.github/actions/setup-nix
-
-      - name: cargo fmt --check
-        run: nix develop --command cargo fmt --check
-
   build:
     name: cargo build
     runs-on: macos-15
@@ -54,11 +34,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Setup Nix
-        uses: ./.github/actions/setup-nix
+      - name: Setup mise
+        uses: ./.github/actions/setup-mise
 
       - name: cargo build
-        run: nix develop --command cargo build
+        run: cargo build
 
   clippy:
     name: cargo clippy
@@ -72,8 +52,8 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Setup Nix
-        uses: ./.github/actions/setup-nix
+      - name: Setup mise
+        uses: ./.github/actions/setup-mise
 
       - name: cargo clippy
-        run: nix develop --command cargo clippy -- -D warnings
+        run: cargo clippy -- -D warnings

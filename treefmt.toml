@@ -1,9 +1,5 @@
 [global]
-excludes = [".git/**", "result/**", "target/**"]
-
-[formatter.nix]
-command = "nixfmt"
-includes = ["*.nix"]
+excludes = [".git/**", "target/**"]
 
 [formatter.rust]
 command = "rustfmt"
